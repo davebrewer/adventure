@@ -4,7 +4,7 @@ import { createFrames, Button } from "frames.js/next";
 
  
 const frames = createFrames({
-  basePath: "/",
+  basePath: "/frames/",
   initialState: {
     pageIndex: 0,
   },

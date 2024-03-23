@@ -1,15 +1,14 @@
 // ./app/frames/route.tsx
 /* eslint-disable react/jsx-key */
 import { createFrames, Button } from "frames.js/next";
-import { getRandomColor, findNextRoomId } from "../utils";
-import { mazeRooms } from "../config";
-import { Room, Direction } from "../types";
+import { getRandomColor, findNextRoomId } from "../../utils";
+import { mazeRooms } from "../../config";
+import { Room, Direction } from "../../types";
  
 const frames = createFrames({
-  basePath: "/moves",
+  basePath: "/frames/moves",
   initialState: {
     pageIndex: 0,
-    roomId: 0,
   },
 });
  
@@ -113,7 +112,7 @@ const handleRequest = frames(async (ctx) => {
       </div>
     ),
     buttons: [
-      currentRoom?.doorLeft && !currentRoom.endFrame && (
+      currentRoom?.doorLeft && !currentRoom.endFrame ? (
         <Button
           action="post"
           target={{
@@ -122,8 +121,8 @@ const handleRequest = frames(async (ctx) => {
         >
           ⬅️
         </Button>
-      ),
-      currentRoom?.doorTop && !currentRoom.endFrame && (
+      ) : null,
+      currentRoom?.doorTop && !currentRoom.endFrame ? (
         <Button
           action="post"
           target={{
@@ -132,8 +131,8 @@ const handleRequest = frames(async (ctx) => {
         >
           ⬆️
         </Button>
-      ),
-      currentRoom?.doorBottom && !currentRoom.endFrame && (
+      ) : null,
+      currentRoom?.doorBottom && !currentRoom.endFrame ? (
         <Button
           action="post"
           target={{
@@ -142,8 +141,8 @@ const handleRequest = frames(async (ctx) => {
         >
           ⬇️
         </Button>
-      ),
-      currentRoom?.doorRight && !currentRoom.endFrame && (
+      ): null,
+      currentRoom?.doorRight && !currentRoom.endFrame ? (
         <Button
           action="post"
           target={{
@@ -152,16 +151,16 @@ const handleRequest = frames(async (ctx) => {
         >
           ➡️
         </Button>
-      ),
-      currentRoom.endFrame && (
-        <Button
-          action="post"
-          target="/end"
-        >
-          Congratulations. The End.
-        </Button>
-      ),
-    ].filter(Boolean),
+      ): null,
+      // currentRoom.endFrame ? (
+      //   <Button
+      //     action="post"
+      //     target="/frames/moves/end"
+      //   >
+      //     Congratulations. The End.
+      //   </Button>
+      // ): null,
+    ]
   };
 });
  
