@@ -2,7 +2,7 @@ import { Room, Direction, ButtonArray } from './types';
 import { Button } from "frames.js/next";
 
 // ROOM COLOURS
-const ntscPalette = {
+export const ntscPalette = {
   blue: "#1C02FF", // A bright, vivid blue
   orange: "#FAA00B", // A rich, vibrant orange
   purple: "#B200FE", // A deep, striking purple

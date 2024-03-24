@@ -66,7 +66,7 @@ export const mazeRooms: Room[] = [
 
   // Row 2
   { id: 5, position_x: 1, position_y: 2, doorTop: true, doorRight: true, doorBottom: true, doorLeft: false, special: false, endFrame: false },
-  { id: 6, position_x: 2, position_y: 2, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
+  { id: 6, position_x: 2, position_y: 2, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: 'leftarrow', endFrame: false },
   { id: 7, position_x: 3, position_y: 2, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
   { id: 8, position_x: 4, position_y: 2, doorTop: false, doorRight: false, doorBottom: false, doorLeft: true, special: 'easteregg', endFrame: false },
   { id: 9, position_x: 5, position_y: 2, doorTop: true, doorRight: false, doorBottom: true, doorLeft: false, special: false, endFrame: false },
@@ -90,5 +90,5 @@ export const mazeRooms: Room[] = [
   { id: 21, position_x: 2, position_y: 5, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
   { id: 22, position_x: 3, position_y: 5, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
   { id: 23, position_x: 4, position_y: 5, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
-  { id: 24, position_x: 5, position_y: 5, doorTop: false, doorRight: false, doorBottom: false, doorLeft: true, special: false, endFrame: true },
+  { id: 24, position_x: 5, position_y: 5, doorTop: false, doorRight: false, doorBottom: false, doorLeft: true, special: 'chalace', endFrame: true },
 ];
