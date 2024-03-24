@@ -1,21 +1,23 @@
 // ./app/frames/route.tsx
 /* eslint-disable react/jsx-key */
 import { createFrames, Button } from "frames.js/next";
+import { ntscPalette } from "../utils";
 
  
 const frames = createFrames({
   basePath: "/frames/",
-  initialState: {
-    pageIndex: 0,
-  },
 });
  
 const handleRequest = frames(async (ctx) => {
   return {
     image: (
-      <div tw="flex flex-col">
-        <div tw="flex">
+      <div tw="flex flex-col items-center justify-center" style={{background: ntscPalette.orange, width: '100%', height: '100%'}}>
+        {/* <img src="/adventure.jpg" tw="w-1/2" /> */}
+        <div tw="flex text-white text-8xl uppercase">
           Adventure
+        </div>
+        <div tw="flex text-white text-4xl uppercase">
+          Video Frame
         </div>
       </div>
     ),

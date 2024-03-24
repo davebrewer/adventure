@@ -4,35 +4,38 @@ import { createFrames, Button } from "frames.js/next";
 import { getRandomColor, findNextRoomId, getButtons, ntscPalette } from "../../utils";
 import { mazeRooms } from "../../config";
 import { Room, Direction } from "../../types";
- 
+
 const frames = createFrames({
   basePath: "/frames/moves",
   initialState: {
     pageIndex: 2,
-  },
-});
+    specialItems: ''
+  }
+})
  
 const handleRequest = frames(async (ctx) => {
-  console.log('ctx move: ', ctx.searchParams.move);
+  console.log('ctx move: ', ctx.searchParams);
 
   const direction: Direction = ctx.searchParams.move as Direction;
 
   const pageIndex = Number(ctx.searchParams.pageIndex || ctx.initialState.pageIndex);
+  let specialItems = ctx.searchParams.specialItems || ctx.initialState.specialItems;
  
   let currentRoom: Room; 
   
   if (ctx.searchParams.move) {
-    console.log('fnr', mazeRooms, pageIndex, direction, findNextRoomId(mazeRooms, pageIndex, direction));
+    // console.log('fnr', mazeRooms, pageIndex, direction, findNextRoomId(mazeRooms, pageIndex, direction));
     currentRoom = findNextRoomId(mazeRooms, pageIndex, direction);
   } else {
     currentRoom = mazeRooms[ctx.initialState.pageIndex];
   }
 
-  console.log('current room ->', currentRoom);
+  // console.log('current room ->', currentRoom);
   const roomColor = getRandomColor();
 
-  if (ctx.searchParams.move) {
-    // find out the current room
+  if (currentRoom.special && !specialItems.includes(currentRoom.special)) {
+    specialItems = specialItems ? `${specialItems},${currentRoom.special}` : currentRoom.special;
+    console.log(currentRoom.special, 'specialItems ->', specialItems);
   }
 
   return {
@@ -159,6 +162,22 @@ const handleRequest = frames(async (ctx) => {
             )
         }
 
+{
+          currentRoom?.special === 'arrows' &&
+            (
+              <div style={{display:'flex', width: '70px', height: '50px', position: 'absolute', top:'45.5%', left: '44.5%'}}>
+                <div style={{height:'10px', width: '70px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: 0, top: '20px'}}></div> 
+                <div style={{height:'10px', width: '70px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '80px', top: '20px'}}></div>   
+                <div style={{height:'30px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '10px', top: '10px'}}></div>
+                <div style={{height:'10px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '20px', top: 0}}></div>
+                <div style={{height:'10px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '20px', top: '40px'}}></div>
+                <div style={{height:'10px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '120px', top: 0}}></div>
+                <div style={{height:'10px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '120px', top: '40px'}}></div>
+                <div style={{height:'30px', width: '10px', backgroundColor: ntscPalette.yellow, position: 'absolute', left: '130px', top: '10px'}}></div>
+              </div>
+            )
+        }
+
         {
           currentRoom?.special === 'dragon' &&
             (
@@ -187,10 +206,17 @@ const handleRequest = frames(async (ctx) => {
               </div>
             )
         }
+
+        {
+          currentRoom?.endFrame && 
+            (
+              <div style={{display:'flex', fontSize: '30px', position: 'absolute', top: '20%'}}>You collected the: {specialItems}</div>
+            )
+        }
       </div>
     ),
     buttons: [
-      ...getButtons(currentRoom)
+      ...getButtons(currentRoom, specialItems)
     ]
   };
 });

@@ -6,7 +6,7 @@ export type Room = {
   doorRight: boolean;
   doorBottom: boolean;
   doorLeft: boolean;
-  special: 'dragon' | 'easteregg' | 'key' | 'chalace' | 'leftarrow' | false;
+  special: 'dragon' | 'easteregg' | 'key' | 'chalace' | 'leftarrow' | 'arrows' | false;
   endFrame: boolean;
 };
 

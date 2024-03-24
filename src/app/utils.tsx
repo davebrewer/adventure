@@ -45,17 +45,17 @@ export function findNextRoomId(mazeMap: Room[], currentRoomId: number, direction
   return nextRoom ?? mazeMap[0]; // Return the first room as a fallback
 }
 
-export const getButtons = (currentRoom: Room): ButtonArray => {
+export const getButtons = (currentRoom: Room, specialItems: string): ButtonArray => {
   const buttons: any[] = [];
 
   if (currentRoom?.doorLeft === true && !currentRoom.endFrame) 
-    buttons.push(<Button action="post" target={{ query: { move: 'left', pageIndex: currentRoom.id } }}>⬅️</Button>);
+    buttons.push(<Button action="post" target={{ query: { move: 'left', pageIndex: currentRoom.id, specialItems } }}>⬅️</Button>);
   if (currentRoom?.doorTop === true && !currentRoom.endFrame) 
-    buttons.push(<Button action="post" target={{ query: { move: 'top', pageIndex: currentRoom.id } }}>⬆️</Button>);
+    buttons.push(<Button action="post" target={{ query: { move: 'top', pageIndex: currentRoom.id, specialItems } }}>⬆️</Button>);
   if (currentRoom?.doorBottom === true && !currentRoom.endFrame) 
-    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'bottom', pageIndex: currentRoom.id } }}>⬇️</Button>));
+    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'bottom', pageIndex: currentRoom.id, specialItems } }}>⬇️</Button>));
   if (currentRoom?.doorRight === true && !currentRoom.endFrame) 
-    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'right', pageIndex: currentRoom.id } }}>➡️</Button>));
+    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'right', pageIndex: currentRoom.id, specialItems } }}>➡️</Button>));
   if (currentRoom.endFrame) 
     buttons.push(<Button action="post" target="/end">Congratulations. The End.</Button>);
   

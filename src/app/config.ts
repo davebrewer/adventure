@@ -60,7 +60,7 @@ export const mazeRooms: Room[] = [
   // Row 1
   { id: 0, position_x: 1, position_y: 1, doorTop: false, doorRight: true, doorBottom: true, doorLeft: false, special: false, endFrame: false },
   { id: 1, position_x: 2, position_y: 1, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
-  { id: 2, position_x: 3, position_y: 1, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
+  { id: 2, position_x: 3, position_y: 1, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: 'arrows', endFrame: false },
   { id: 3, position_x: 4, position_y: 1, doorTop: false, doorRight: true, doorBottom: false, doorLeft: true, special: false, endFrame: false },
   { id: 4, position_x: 5, position_y: 1, doorTop: false, doorRight: false, doorBottom: true, doorLeft: true, special: false, endFrame: false },
 
