@@ -11,3 +11,9 @@ export type Room = {
 };
 
 export type Direction = 'top' | 'bottom' | 'left' | 'right';
+
+export type ButtonArray = 
+  | [any]
+  | [any, any]
+  | [any, any, any]
+  | [any, any, any, any];

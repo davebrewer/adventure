@@ -1,7 +1,7 @@
 // ./app/frames/route.tsx
 /* eslint-disable react/jsx-key */
 import { createFrames, Button } from "frames.js/next";
-import { getRandomColor, findNextRoomId } from "../../utils";
+import { getRandomColor, findNextRoomId, getButtons } from "../../utils";
 import { mazeRooms } from "../../config";
 import { Room, Direction } from "../../types";
  
@@ -112,54 +112,7 @@ const handleRequest = frames(async (ctx) => {
       </div>
     ),
     buttons: [
-      currentRoom?.doorLeft && !currentRoom.endFrame ? (
-        <Button
-          action="post"
-          target={{
-            query: { move: 'left', pageIndex: currentRoom.id },
-          }}
-        >
-          ⬅️
-        </Button>
-      ) : null,
-      currentRoom?.doorTop && !currentRoom.endFrame ? (
-        <Button
-          action="post"
-          target={{
-            query: { move: 'top', pageIndex: currentRoom.id },
-          }}
-        >
-          ⬆️
-        </Button>
-      ) : null,
-      currentRoom?.doorBottom && !currentRoom.endFrame ? (
-        <Button
-          action="post"
-          target={{
-            query: { move: 'bottom', pageIndex: currentRoom.id },
-          }}
-        >
-          ⬇️
-        </Button>
-      ): null,
-      currentRoom?.doorRight && !currentRoom.endFrame ? (
-        <Button
-          action="post"
-          target={{
-            query: { move: 'right', pageIndex: currentRoom.id },
-          }}
-        >
-          ➡️
-        </Button>
-      ): null,
-      // currentRoom.endFrame ? (
-      //   <Button
-      //     action="post"
-      //     target="/frames/moves/end"
-      //   >
-      //     Congratulations. The End.
-      //   </Button>
-      // ): null,
+      ...getButtons(currentRoom)
     ]
   };
 });

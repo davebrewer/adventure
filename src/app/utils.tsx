@@ -1,4 +1,5 @@
-import { Room, Direction } from './types';
+import { Room, Direction, ButtonArray } from './types';
+import { Button } from "frames.js/next";
 
 // ROOM COLOURS
 const ntscPalette = {
@@ -44,3 +45,21 @@ export function findNextRoomId(mazeMap: Room[], currentRoomId: number, direction
   return nextRoom ?? mazeMap[0]; // Return the first room as a fallback
 }
 
+export const getButtons = (currentRoom: Room): ButtonArray => {
+  const buttons: any[] = [];
+
+  if (currentRoom?.doorLeft === true && !currentRoom.endFrame) 
+    buttons.push(<Button action="post" target={{ query: { move: 'left', pageIndex: currentRoom.id } }}>⬅️</Button>);
+  if (currentRoom?.doorTop === true && !currentRoom.endFrame) 
+    buttons.push(<Button action="post" target={{ query: { move: 'top', pageIndex: currentRoom.id } }}>⬆️</Button>);
+  if (currentRoom?.doorBottom === true && !currentRoom.endFrame) 
+    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'bottom', pageIndex: currentRoom.id } }}>⬇️</Button>));
+  if (currentRoom?.doorRight === true && !currentRoom.endFrame) 
+    buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'right', pageIndex: currentRoom.id } }}>➡️</Button>));
+  if (currentRoom.endFrame) 
+    buttons.push(<Button action="post" target="/end">Congratulations. The End.</Button>);
+  
+  // TypeScript doesn't allow direct assertion to ButtonArray because it can't infer the exact tuple size this way
+  // So, we use a workaround by asserting through `unknown` type
+  return buttons as unknown as ButtonArray;
+};
