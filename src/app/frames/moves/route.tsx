@@ -8,7 +8,7 @@ import { Room, Direction } from "../../types";
 const frames = createFrames({
   basePath: "/frames/moves",
   initialState: {
-    pageIndex: 0,
+    pageIndex: 2,
   },
 });
  
@@ -25,7 +25,7 @@ const handleRequest = frames(async (ctx) => {
     console.log('fnr', mazeRooms, pageIndex, direction, findNextRoomId(mazeRooms, pageIndex, direction));
     currentRoom = findNextRoomId(mazeRooms, pageIndex, direction);
   } else {
-    currentRoom = mazeRooms[0];
+    currentRoom = mazeRooms[ctx.initialState.pageIndex];
   }
 
   console.log('current room ->', currentRoom);
