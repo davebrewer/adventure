@@ -1,3 +1,4 @@
+import { getTokenUrl } from 'frames.js';
 import { Room, Direction, ButtonArray } from './types';
 import { Button } from "frames.js/next";
 
@@ -57,7 +58,19 @@ export const getButtons = (currentRoom: Room, specialItems: string): ButtonArray
   if (currentRoom?.doorRight === true && !currentRoom.endFrame) 
     buttons.push(buttons.push(<Button action="post" target={{ query: { move: 'right', pageIndex: currentRoom.id, specialItems } }}>➡️</Button>));
   if (currentRoom.endFrame) 
-    buttons.push(<Button action="post" target="/end">Congratulations. The End.</Button>);
+    buttons.push(
+      <Button 
+        action="mint" 
+        target={
+          getTokenUrl({
+            address: "0xA06B908f35e713a5E731BB9D1e50F3F347124e58",
+            chainId: 84532
+          })
+        }
+      >
+        Congratulations. Mint Reward!
+      </Button>
+    );
   
   // TypeScript doesn't allow direct assertion to ButtonArray because it can't infer the exact tuple size this way
   // So, we use a workaround by asserting through `unknown` type
